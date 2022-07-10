@@ -11,16 +11,21 @@ import MonthPannelList from "./MonthPannelList";
 export default function MonthPannel() {
   const [month, setMonth] = useState(1);
   const [year, setYear] = useState(2022);
+  const [date, setDate] = useState(1);
+  const [hoverAll, setHoverAll] = useState(true);
 
-  const handleChange = (e) => {
+  const handleMonthChange = (e) => {
     setMonth(e.target.value);
+  };
+  const handleYearChange = (e) => {
+    setYear(e.target.value);
   };
   let monthArray = Month(month, year);
 
   const monthList = monthArray.map((e) => {
     return (
-      <Grid item align={'center'} xs={1.714}>
-        <MonthPannelList day={e} />
+      <Grid item align={"center"} xs={1.714}>
+        <MonthPannelList key={e} day={e} hoverAll={hoverAll} setHoverAll={setHoverAll} setDate={setDate}/>
       </Grid>
     );
   });
@@ -28,14 +33,16 @@ export default function MonthPannel() {
   return (
     <>
       <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth>
+        <Grid container spacing={20} >
+          <Grid item xs={4}>
+        <FormControl >
           <InputLabel id="demo-simple-select-label">Month</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={month}
             label="Month"
-            onChange={handleChange}
+            onChange={handleMonthChange}
           >
             <MenuItem value={1}>Jan</MenuItem>
             <MenuItem value={2}>Feb</MenuItem>
@@ -51,12 +58,60 @@ export default function MonthPannel() {
             <MenuItem value={12}>Dec</MenuItem>
           </Select>
         </FormControl>
+        </Grid>
+        <Grid item xs={4} mt={2}>
+          {date}/0{month}/{year}
+        </Grid>
+        <Grid item xs={4}>
+        <FormControl >
+          <InputLabel id="demo-simple-select-label">Year</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={year}
+            label="Year"
+            onChange={handleYearChange}
+          >
+            <MenuItem value={2022}>2022</MenuItem>
+            <MenuItem value={2023}>2023</MenuItem>
+            <MenuItem value={2024}>2024</MenuItem>
+            <MenuItem value={2025}>2025</MenuItem>
+            <MenuItem value={2026}>2026</MenuItem>
+            <MenuItem value={2027}>2027</MenuItem>
+            <MenuItem value={2028}>2028</MenuItem>
+            <MenuItem value={2029}>2029</MenuItem>
+            <MenuItem value={2030}>2030</MenuItem>
+            <MenuItem value={2031}>2031</MenuItem>
+            <MenuItem value={2032}>2032</MenuItem>
+            <MenuItem value={2033}>2033</MenuItem>
+          </Select>
+        </FormControl>
+        </Grid>
+        </Grid>
       </Box>
-      <Grid container spacing={7} >
-      <Grid item align={'center'} xs={1.714}>
-        
-      </Grid>
-          {monthList}
+      <Grid container spacing={7} mt={1}>
+        <Grid item align={"center"} xs={1.714}>
+          Sun
+        </Grid>
+        <Grid item align={"center"} xs={1.714}>
+          Mon
+        </Grid>
+        <Grid item align={"center"} xs={1.714}>
+          Tue
+        </Grid>
+        <Grid item align={"center"} xs={1.714}>
+          Wed
+        </Grid>
+        <Grid item align={"center"} xs={1.714}>
+          Thu
+        </Grid>
+        <Grid item align={"center"} xs={1.714}>
+          Fri
+        </Grid>
+        <Grid item align={"center"} xs={1.714}>
+          Sat
+        </Grid>
+        {monthList}
       </Grid>
     </>
   );

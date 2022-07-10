@@ -32,7 +32,7 @@ export default function Month(month, year) {
     if (counter > 6) {
       counter = 0;
     }
-    arr.push(`${displayWeek(counter)} ${y}`);
+    arr.push(`${y}`);
     counter ++;
   }
   return arr;
