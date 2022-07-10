@@ -1,3 +1,7 @@
-.hover {
+.day-active {
   border: 5px solid red;
+}
+
+.day:hover {
+  background-color: rgba(138, 138, 138, 0.326);
 }

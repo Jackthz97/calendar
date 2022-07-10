@@ -16,9 +16,11 @@ export default function MonthPannel() {
 
   const handleMonthChange = (e) => {
     setMonth(e.target.value);
+    setChosen(0)
   };
   const handleYearChange = (e) => {
     setYear(e.target.value);
+    setChosen(0)
   };
   let monthArray = Month(month, year);
 
@@ -60,7 +62,7 @@ export default function MonthPannel() {
         </FormControl>
         </Grid>
         <Grid item xs={4} mt={2}>
-          0{month}/{date}/{year}
+          0{month}/{date < 10 && 0}{date}/{year}
         </Grid>
         <Grid item xs={4}>
         <FormControl >
