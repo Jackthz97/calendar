@@ -1,16 +1,16 @@
 import React, {useState} from 'react'
 import { Grid } from '@mui/material'
 
-export default function MonthPannelList({day, hoverAll, setHoverAll, setDate}) {
-  const [hover, setHover] = useState(false);
-  const handleClick = () => {
-    setDate(day);
-    hover ? setHover(false) : setHover(true);
-  }
+export default function MonthPannelList({day, setDate, active, onClick}) {
+  // const [hover, setHover] = useState(false);
+  // const handleClick = () => {
+  //   setDate(day);
+  //   hover ? setHover(false) : setHover(true);
+  // }
 
   return (
-    <Grid className={hover ? 'hover' : false}>
-      <a onClick={handleClick}>
+    <Grid className={active ? 'hover' : false}>
+      <a onClick={onClick}>
         {day}
       </a>
     </Grid>

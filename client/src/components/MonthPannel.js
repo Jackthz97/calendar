@@ -12,7 +12,7 @@ export default function MonthPannel() {
   const [month, setMonth] = useState(1);
   const [year, setYear] = useState(2022);
   const [date, setDate] = useState(1);
-  const [hoverAll, setHoverAll] = useState(true);
+  const [chosen, setChosen] = useState();
 
   const handleMonthChange = (e) => {
     setMonth(e.target.value);
@@ -25,7 +25,7 @@ export default function MonthPannel() {
   const monthList = monthArray.map((e) => {
     return (
       <Grid item align={"center"} xs={1.714}>
-        <MonthPannelList key={e} day={e} hoverAll={hoverAll} setHoverAll={setHoverAll} setDate={setDate}/>
+        <MonthPannelList key={e} day={e} setDate={setDate} active={e === chosen} onClick={() => {setChosen(e); setDate(e);}}/>
       </Grid>
     );
   });
@@ -60,7 +60,7 @@ export default function MonthPannel() {
         </FormControl>
         </Grid>
         <Grid item xs={4} mt={2}>
-          {date}/0{month}/{year}
+          0{month}/{date}/{year}
         </Grid>
         <Grid item xs={4}>
         <FormControl >
