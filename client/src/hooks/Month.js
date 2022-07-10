@@ -35,7 +35,7 @@ export default function Month(month, year) {
     arr.push(`${displayWeek(counter)} ${y}`);
     counter ++;
   }
-  return remainder, arr;
+  return arr;
 
 
 // console.log(displayMonth(7, 2022));

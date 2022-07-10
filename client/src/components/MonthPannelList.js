@@ -1,7 +1,11 @@
 import React from 'react'
+import { Grid } from '@mui/material'
 
-export default function MonthPannelList() {
+export default function MonthPannelList(props) {
+
   return (
-    <div>MonthPannelList</div>
+    <Grid>
+      {props.day}
+    </Grid>
   )
 }
