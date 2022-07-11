@@ -15,6 +15,7 @@ export default function MonthPannel({ mode, setMode }) {
   const [year, setYear] = useState(2022);
   const [date, setDate] = useState(1);
   const [chosen, setChosen] = useState();
+  const [popup, setPopup] = useState(false);
 
   const handleMode = () => {
     mode === "dark" ? setMode("light") : setMode("dark");
@@ -28,6 +29,9 @@ export default function MonthPannel({ mode, setMode }) {
     setYear(e.target.value);
     setChosen(0);
   };
+  const handleNotes = () => {
+    popup ? setPopup(false) : setPopup(true);
+  }
   let monthArray = Month(month, year);
 
   const monthList = monthArray.map((e) => {
@@ -57,8 +61,10 @@ export default function MonthPannel({ mode, setMode }) {
           onClick={() => {
             setChosen(e.date);
             setDate(e.date);
+            handleNotes();
           }}
           active={e.date === chosen}
+          popup={popup}
         />
       </Grid>
     );
@@ -72,12 +78,10 @@ export default function MonthPannel({ mode, setMode }) {
           container
           xs={2}
           direction={"row"}
-          // alignItems={"center"}
-          // justifyContent={"center"}
           height={200}
           mt={5}
         >
-          <Grid container spacing={1} maxWidth={200} ml={5}>
+          <Grid container spacing={1} maxWidth={200} ml={6} className='month-pannel-small'>
             <Grid item align={"center"} xs={1.714}>
               S
             </Grid>
@@ -104,7 +108,7 @@ export default function MonthPannel({ mode, setMode }) {
         </Grid>
         <Grid item xs={10}>
           <Box sx={{ minWidth: 120 }}>
-            <Grid container spacing={20}>
+            <Grid container spacing={1}>
               <Grid item xs={4}>
                 <FormControl>
                   <InputLabel id="demo-simple-select-label">Month</InputLabel>
@@ -129,8 +133,6 @@ export default function MonthPannel({ mode, setMode }) {
                     <MenuItem value={12}>Dec</MenuItem>
                   </Select>
                 </FormControl>
-              </Grid>
-              <Grid item xs={4}>
                 <FormControl>
                   <InputLabel id="simple-select-label">Year</InputLabel>
                   <Select
@@ -155,7 +157,9 @@ export default function MonthPannel({ mode, setMode }) {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={4} mt={2}>
+              <Grid item container xs={8} mt={2} direction={'row'} justifyContent={'space-around'}>
+                <Grid>
+
                 {typeof date === "string"
                   ? month - 1 < 1
                     ? 12
@@ -166,11 +170,14 @@ export default function MonthPannel({ mode, setMode }) {
                 /{date < 10 && 0}
                 {date}/
                 {typeof date === "string" ? month - 1 < 1 && year - 1 : year}
-                <Button onClick={handleMode}>{mode}</Button>
+                </Grid>
+                <Grid>
+                  <Button onClick={handleMode}>{mode}</Button>
+                  </Grid>
               </Grid>
             </Grid>
           </Box>
-          <Grid container direction={"row"} spacing={0.1}>
+          <Grid container direction={"row"} spacing={0}>
             {monthChart}
           </Grid>
         </Grid>
