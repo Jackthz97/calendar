@@ -8,12 +8,17 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MonthPannelList from "./MonthPannelList";
 import MonthChart from "./MonthChart";
+import { Button } from "@mui/material";
 
-export default function MonthPannel() {
+export default function MonthPannel({mode, setMode}) {
   const [month, setMonth] = useState(1);
   const [year, setYear] = useState(2022);
   const [date, setDate] = useState(1);
   const [chosen, setChosen] = useState();
+
+  const handleMode = () => {
+    mode === "dark" ? setMode("light") : setMode("dark")
+  }
 
   const handleMonthChange = (e) => {
     setMonth(e.target.value);
@@ -59,9 +64,11 @@ export default function MonthPannel() {
           xs={2}
           direction={"row"}
           // alignItems={"center"}
-          justifyContent={"center"}
+          // justifyContent={"center"}
+          height={200}
+          mt={5}
         >
-          <Grid container spacing={1} mt={5} maxWidth={200}>
+          <Grid container spacing={1} maxWidth={200} ml={5}>
             <Grid item align={"center"} xs={1.714}>
               S
             </Grid>
@@ -89,7 +96,7 @@ export default function MonthPannel() {
         <Grid item xs={10}>
           <Box sx={{ minWidth: 120 }}>
             <Grid container spacing={20}>
-              <Grid item xs={2}>
+              <Grid item xs={4}>
                 <FormControl>
                   <InputLabel id="demo-simple-select-label">Month</InputLabel>
                   <Select
@@ -114,7 +121,7 @@ export default function MonthPannel() {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={4}>
                 <FormControl>
                   <InputLabel id="simple-select-label">Year</InputLabel>
                   <Select
@@ -139,7 +146,7 @@ export default function MonthPannel() {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={8} mt={2}>
+              <Grid item xs={4} mt={2}>
                 {typeof date === "string"
                   ? month - 1 < 1
                     ? 12
@@ -149,17 +156,21 @@ export default function MonthPannel() {
                   : month}
                 /{date < 10 && 0}
                 {date}/
-                {typeof date === "string" ? month - 1 < 1 && year - 1 : year}
+                {typeof date === "string" ? (month - 1 < 1 && (year - 1)) : year}
+                <Button onClick={handleMode}>{mode}</Button>
               </Grid>
             </Grid>
           </Box>
+          <Grid container direction={"row"} spacing={10}>
+          {monthChart}
         </Grid>
-        <Grid item xs={2}></Grid>
+        </Grid>
+        {/* <Grid item xs={2}></Grid>
       <Grid item xs={10}>
         <Grid container direction={"row"} spacing={10}>
           {monthChart}
         </Grid>
-      </Grid>
+      </Grid> */}
       </Grid>
     </>
   );
