@@ -26,3 +26,62 @@
 .month-pannel-small {
   border: 1px solid rgb(60, 60, 60);
 }
+
+.month-pannel {
+  position: absolute
+}
+.popup {
+  position: relative;
+  /* display: flex;
+  flex-flow: wrap;
+  direction: column;
+  justify-content: center; */
+  background-color: whitesmoke;
+  height: 350px;
+  width: 300px;
+  left: 50%;
+  top: 350px;
+  z-index: 1;
+  border-radius: 20px;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+
+}
+.popup-dark {
+  position: relative;
+  /* display: flex;
+  flex-flow: wrap;
+  direction: column;
+  justify-content: center; */
+  background-color: rgb(61, 61, 61);
+  height: 350px;
+  width: 300px;
+  left: 50%;
+  top: 350px;
+  z-index: 1;
+  border-radius: 20px;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+.text-box {
+  display: flex;
+  direction: row;
+  justify-content: center;
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+.EventNoteIcon {
+  transform: scale(1.8);
+  position: relative;
+  top: -10px;
+}

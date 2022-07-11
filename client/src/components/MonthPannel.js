@@ -9,6 +9,7 @@ import Select from "@mui/material/Select";
 import MonthPannelList from "./MonthPannelList";
 import MonthChart from "./MonthChart";
 import { Button } from "@mui/material";
+import Popup from "./Popup";
 
 export default function MonthPannel({ mode, setMode }) {
   const [month, setMonth] = useState(1);
@@ -72,7 +73,8 @@ export default function MonthPannel({ mode, setMode }) {
 
   return (
     <>
-      <Grid container>
+  {popup && <Popup mode={mode}/> }
+      <Grid container className="month-pannel">
         <Grid
           item
           container
