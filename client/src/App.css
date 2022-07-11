@@ -4,7 +4,16 @@
   cursor: pointer;
 }
 
+.day{
+  border: 1px solid rgb(60, 60, 60);
+}
+
 .day:hover {
+  background-color: rgba(61, 156, 245, 0.326);
+  cursor: pointer;
+}
+
+.days:hover {
   background-color: rgba(61, 156, 245, 0.326);
   cursor: pointer;
 }

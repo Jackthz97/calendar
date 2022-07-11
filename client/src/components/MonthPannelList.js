@@ -9,7 +9,7 @@ export default function MonthPannelList({day, setDate, active, onClick}) {
   // }
 
   return (
-    <Grid onClick={onClick} className={active ? 'day-active' : 'day'}>
+    <Grid onClick={onClick} className={active ? 'day-active' : 'days'}>
       {day}
     </Grid>
   )

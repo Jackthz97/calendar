@@ -10,15 +10,15 @@ import MonthPannelList from "./MonthPannelList";
 import MonthChart from "./MonthChart";
 import { Button } from "@mui/material";
 
-export default function MonthPannel({mode, setMode}) {
+export default function MonthPannel({ mode, setMode }) {
   const [month, setMonth] = useState(1);
   const [year, setYear] = useState(2022);
   const [date, setDate] = useState(1);
   const [chosen, setChosen] = useState();
 
   const handleMode = () => {
-    mode === "dark" ? setMode("light") : setMode("dark")
-  }
+    mode === "dark" ? setMode("light") : setMode("dark");
+  };
 
   const handleMonthChange = (e) => {
     setMonth(e.target.value);
@@ -34,7 +34,7 @@ export default function MonthPannel({mode, setMode}) {
     return (
       <Grid item align={"center"} xs={1.714}>
         <MonthPannelList
-        key={e.date}
+          key={e.date}
           day={e.date}
           setDate={setDate}
           active={e.date === chosen}
@@ -50,7 +50,16 @@ export default function MonthPannel({mode, setMode}) {
   const monthChart = monthArray.map((e) => {
     return (
       <Grid item align={"center"} xs={1.714}>
-        <MonthChart key={e.date} day={e.date} weekday={e.weekday} active={e.date === chosen}/>
+        <MonthChart
+          key={e.date}
+          day={e.date}
+          weekday={e.weekday}
+          onClick={() => {
+            setChosen(e.date);
+            setDate(e.date);
+          }}
+          active={e.date === chosen}
+        />
       </Grid>
     );
   });
@@ -156,21 +165,15 @@ export default function MonthPannel({mode, setMode}) {
                   : month}
                 /{date < 10 && 0}
                 {date}/
-                {typeof date === "string" ? (month - 1 < 1 && (year - 1)) : year}
+                {typeof date === "string" ? month - 1 < 1 && year - 1 : year}
                 <Button onClick={handleMode}>{mode}</Button>
               </Grid>
             </Grid>
           </Box>
-          <Grid container direction={"row"} spacing={10}>
-          {monthChart}
+          <Grid container direction={"row"} spacing={0.1}>
+            {monthChart}
+          </Grid>
         </Grid>
-        </Grid>
-        {/* <Grid item xs={2}></Grid>
-      <Grid item xs={10}>
-        <Grid container direction={"row"} spacing={10}>
-          {monthChart}
-        </Grid>
-      </Grid> */}
       </Grid>
     </>
   );
