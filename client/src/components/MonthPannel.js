@@ -15,8 +15,12 @@ export default function MonthPannel({ mode, setMode }) {
   const [month, setMonth] = useState(1);
   const [year, setYear] = useState(2022);
   const [date, setDate] = useState(1);
+  const [popupDate, setPopupDate] = useState(1);
   const [chosen, setChosen] = useState();
   const [popup, setPopup] = useState(false);
+  const [note, setNote] = useState();
+  const [weekday, setWeekday] = useState();
+  const [popupWeekday, setPopupWeekday] = useState();
 
   const handleMode = () => {
     mode === "dark" ? setMode("light") : setMode("dark");
@@ -32,7 +36,7 @@ export default function MonthPannel({ mode, setMode }) {
   };
   const handleNotes = () => {
     popup ? setPopup(false) : setPopup(true);
-  }
+  };
   let monthArray = Month(month, year);
 
   const monthList = monthArray.map((e) => {
@@ -63,9 +67,13 @@ export default function MonthPannel({ mode, setMode }) {
             setChosen(e.date);
             setDate(e.date);
             handleNotes();
+            setWeekday(e.weekday);
           }}
+          popupWeekday={popupWeekday}
+          popupDate={popupDate}
+          note={note}
+          setNote={setNote}
           active={e.date === chosen}
-          popup={popup}
         />
       </Grid>
     );
@@ -73,17 +81,28 @@ export default function MonthPannel({ mode, setMode }) {
 
   return (
     <>
-  {popup && <Popup mode={mode}/> }
+      {popup && (
+        <Popup
+          mode={mode}
+          setNote={setNote}
+          popup={popup}
+          setPopup={setPopup}
+          date={date}
+          setPopupDate={setPopupDate}
+          popupDate={popupDate}
+          weekday={weekday}
+          setPopupWeekday={setPopupWeekday}
+        />
+      )}
       <Grid container className="month-pannel">
-        <Grid
-          item
-          container
-          xs={2}
-          direction={"row"}
-          height={200}
-          mt={5}
-        >
-          <Grid container spacing={1} maxWidth={200} ml={6} className='month-pannel-small'>
+        <Grid item container xs={2} direction={"row"} height={200} mt={5}>
+          <Grid
+            container
+            spacing={1}
+            maxWidth={200}
+            ml={6}
+            className="month-pannel-small"
+          >
             <Grid item align={"center"} xs={1.714}>
               S
             </Grid>
@@ -159,23 +178,29 @@ export default function MonthPannel({ mode, setMode }) {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item container xs={8} mt={2} direction={'row'} justifyContent={'space-around'}>
+              <Grid
+                item
+                container
+                xs={8}
+                mt={2}
+                direction={"row"}
+                justifyContent={"space-around"}
+              >
                 <Grid>
-
-                {typeof date === "string"
-                  ? month - 1 < 1
-                    ? 12
-                    : month - 1
-                  : month < 10
-                  ? "0" + month
-                  : month}
-                /{date < 10 && 0}
-                {date}/
-                {typeof date === "string" ? month - 1 < 1 && year - 1 : year}
+                  {typeof date === "string"
+                    ? month - 1 < 1
+                      ? 12
+                      : month - 1
+                    : month < 10
+                    ? "0" + month
+                    : month}
+                  /{date < 10 && 0}
+                  {date}/
+                  {typeof date === "string" ? month - 1 < 1 && year - 1 : year}
                 </Grid>
                 <Grid>
                   <Button onClick={handleMode}>{mode}</Button>
-                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Box>
