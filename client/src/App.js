@@ -6,7 +6,7 @@ import { Grid } from '@mui/material';
 
 function App() {
   return (
-    <Grid container mt={1.5} direction={'row'} justifyContent={'center'}>
+    <Grid container mt={1.5} direction={'row'} >
       <MonthPannel />
     </Grid>
 

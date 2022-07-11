@@ -24,15 +24,15 @@ export default function Month(month, year) {
   let remainder = weekday - (Math.floor(weekday / 7) * 7);
   let counter = remainder;
   if (remainder > 0) {
-    for (let x = 0; x < remainder; x++) {
-      arr.push("*");
+    for (let x = 31 - remainder; x <= 30; x++) {
+      arr.push(x.toString());
     }
   }
   for (let y = 1; y < 31; y++) {
     if (counter > 6) {
       counter = 0;
     }
-    arr.push(`${y}`);
+    arr.push(y);
     counter ++;
   }
   return arr;

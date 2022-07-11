@@ -1,7 +1,10 @@
 .day-active {
-  border: 5px solid red;
+  border: 1px solid rgb(61, 156, 245);
+  background-color: rgba(61, 156, 245, 0.326);
+  cursor: pointer;
 }
 
 .day:hover {
-  background-color: rgba(138, 138, 138, 0.326);
+  background-color: rgba(61, 156, 245, 0.326);
+  cursor: pointer;
 }
