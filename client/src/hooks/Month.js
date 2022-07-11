@@ -25,14 +25,14 @@ export default function Month(month, year) {
   let counter = remainder;
   if (remainder > 0) {
     for (let x = 31 - remainder; x <= 30; x++) {
-      arr.push(x.toString());
+      arr.push({date: x.toString()});
     }
   }
   for (let y = 1; y < 31; y++) {
     if (counter > 6) {
       counter = 0;
     }
-    arr.push(y);
+    arr.push({date: y, weekday: displayWeek(counter)});
     counter ++;
   }
   return arr;
