@@ -4,11 +4,12 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import EventNoteIcon from '@mui/icons-material/EventNote';
 
-export default function Popup({ mode, setNote, popup, setPopup, date, popupDate, setPopupDate, weekday, setPopupWeekday }) {
+export default function Popup({ mode, setNote, setPopup, date, weekday, setReminder, note, year, month }) {
   const handlePopup = () => {
     setPopup(false)
-    setPopupDate(date);
-    setPopupWeekday(weekday);
+    setReminder(prev => ({data: [...prev.data, {weekday: weekday, date: date, year: year, reminder: note, month: month}]}))
+    // ({...prev, weekday: prev.weekday.concat(weekday), date: prev.date.concat(date), year: prev.year.concat(year), reminder: prev.reminder.concat(note), month: prev.month.concat(month)})
+    // console.log("yoooooo8ooooooooooo",reminder)
   }
   return (
     <Grid className={mode === "dark" ? "popup-dark" : "popup"}>

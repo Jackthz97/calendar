@@ -32,11 +32,7 @@
 }
 .popup {
   position: relative;
-  /* display: flex;
-  flex-flow: wrap;
-  direction: column;
-  justify-content: center; */
-  background-color: whitesmoke;
+  background-color: rgb(153, 206, 255);
   height: 350px;
   width: 300px;
   left: 50%;
@@ -49,10 +45,6 @@
 }
 .popup-dark {
   position: relative;
-  /* display: flex;
-  flex-flow: wrap;
-  direction: column;
-  justify-content: center; */
   background-color: rgb(61, 61, 61);
   height: 350px;
   width: 300px;

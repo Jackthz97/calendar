@@ -1,45 +1,36 @@
-const displayWeek = (day) => {
-  if (day === 0) {
-    return "Sun";
-  } else if (day === 1) {
-    return "Mon";
-  } else if (day === 2) {
-    return "Tue";
-  } else if (day === 3) {
-    return "Wed";
-  } else if (day === 4) {
-    return "Thu";
-  } else if (day === 5) {
-    return "Fri";
-  } return "Sat";
-};
+import DisplayWeek from "./DisplayWeek";
 
-export default function Month(month, year) {
+export default function Month(month, year, reminder) {
   const monthChart = [0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5];
   let arr = [];
-
   let i = year - 2000;
   let j = Math.floor(i / 4);
   let weekday = 1 + monthChart[ month - 1 ] + 6 + i + j;
   let remainder = weekday - (Math.floor(weekday / 7) * 7);
   let counter = remainder;
+
   if (remainder > 0) {
     for (let x = 31 - remainder; x <= 30; x++) {
       arr.push({date: x.toString()});
     }
   }
+
   for (let y = 1; y < 31; y++) {
     if (counter > 6) {
       counter = 0;
     }
-    arr.push({date: y, weekday: displayWeek(counter)});
+    arr.push({date: y, weekday: DisplayWeek(counter), year: year, month: month, note: false});
     counter ++;
   }
+  
+  for (let i = 0; i < reminder["data"].length; i++) {
+    for (let j = 0; j < arr.length; j++) {
+      if ((reminder["data"][i].weekday === arr[j].weekday) && (reminder["data"][i].date === arr[j].date) && (reminder["data"][i].year === arr[j].year) && (reminder["data"][i].month === arr[j].month)) {
+        let index = arr.indexOf(arr[j]);
+        arr[index].note = reminder["data"][i].reminder;
+      }
+    }
+  }
+  
   return arr;
-
-
-// console.log(displayMonth(7, 2022));
-  // return (
-  //   <div>Month</div>
-  // )
 }

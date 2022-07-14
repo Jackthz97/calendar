@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import Month from "../hooks/Month";
 import Box from "@mui/material/Box";
@@ -15,12 +15,13 @@ export default function MonthPannel({ mode, setMode }) {
   const [month, setMonth] = useState(1);
   const [year, setYear] = useState(2022);
   const [date, setDate] = useState(1);
-  const [popupDate, setPopupDate] = useState(1);
   const [chosen, setChosen] = useState();
   const [popup, setPopup] = useState(false);
   const [note, setNote] = useState();
   const [weekday, setWeekday] = useState();
-  const [popupWeekday, setPopupWeekday] = useState();
+  const [reminder, setReminder] = useState({
+    data: [{}],
+  });
 
   const handleMode = () => {
     mode === "dark" ? setMode("light") : setMode("dark");
@@ -37,15 +38,16 @@ export default function MonthPannel({ mode, setMode }) {
   const handleNotes = () => {
     popup ? setPopup(false) : setPopup(true);
   };
-  let monthArray = Month(month, year);
+
+  let monthArray = Month(month, year, reminder);
 
   const monthList = monthArray.map((e) => {
     return (
+      <React.Fragment key={`${e.weekday}/${e.date}/${e.month}/${e.year}`}>
       <Grid item align={"center"} xs={1.714}>
         <MonthPannelList
-          key={e.date}
+          key={`${e.weekday}/${e.date}/${e.month}/${e.year}`}
           day={e.date}
-          setDate={setDate}
           active={e.date === chosen}
           onClick={() => {
             setChosen(e.date);
@@ -53,14 +55,16 @@ export default function MonthPannel({ mode, setMode }) {
           }}
         />
       </Grid>
+      </React.Fragment>
     );
   });
 
   const monthChart = monthArray.map((e) => {
     return (
+      <React.Fragment key={`${e.weekday}/${e.date}/${e.month}/${e.year}`}>
       <Grid item align={"center"} xs={1.714}>
         <MonthChart
-          key={e.date}
+          key={`${e.weekday}/${e.date}/${e.month}/${e.year}`}
           day={e.date}
           weekday={e.weekday}
           onClick={() => {
@@ -69,13 +73,11 @@ export default function MonthPannel({ mode, setMode }) {
             handleNotes();
             setWeekday(e.weekday);
           }}
-          popupWeekday={popupWeekday}
-          popupDate={popupDate}
-          note={note}
-          setNote={setNote}
           active={e.date === chosen}
+          reminder={e.note}
         />
       </Grid>
+      </React.Fragment>
     );
   });
 
@@ -83,15 +85,16 @@ export default function MonthPannel({ mode, setMode }) {
     <>
       {popup && (
         <Popup
+        key={`${weekday}/${date}/${month}${year}`}
           mode={mode}
           setNote={setNote}
-          popup={popup}
           setPopup={setPopup}
           date={date}
-          setPopupDate={setPopupDate}
-          popupDate={popupDate}
           weekday={weekday}
-          setPopupWeekday={setPopupWeekday}
+          setReminder={setReminder}
+          note={note}
+          year={year}
+          month={month}
         />
       )}
       <Grid container className="month-pannel">

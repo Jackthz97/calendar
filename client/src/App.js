@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import MonthPannel from './components/MonthPannel';
 import { Grid } from '@mui/material';
