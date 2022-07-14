@@ -16,7 +16,13 @@ export default function MonthChart({
 }) {
   return (
     <Grid
-      className={((day === dd) && (month === mm) && (year === yy)) ? "current-day" : (active ? "day-active" : "day")}
+      className={
+        day === dd && month === mm && year === yy
+          ? "current-day"
+          : active
+          ? "day-active"
+          : "day"
+      }
       onClick={onClick}
       height={200}
     >

@@ -38,11 +38,10 @@ export default function MonthPannel({ mode, setMode }) {
   const handleNotes = () => {
     popup ? setPopup(false) : setPopup(true);
   };
-//let [yy, mm, dd]
   let today = new Date();
-  let yy = today.getFullYear()
-  let mm = today.getMonth()+1
-  let dd = today.getDate()
+  let yy = today.getFullYear();
+  let mm = today.getMonth()+1;
+  let dd = today.getDate();
   console.log(yy, mm, dd)
   let monthArray = Month(month, year, reminder);
 
