@@ -3,6 +3,11 @@
   background-color: rgba(61, 156, 245, 0.326);
   cursor: pointer;
 }
+.current-day {
+  border: 1px solid rgb(91, 251, 150);
+  background-color: rgba(55, 158, 93, 0.343);
+  cursor: pointer;
+}
 .days-active {
   border: 1px solid rgb(61, 156, 245);
   background-color: rgba(61, 156, 245, 0.326);
