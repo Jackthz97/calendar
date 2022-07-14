@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import Month from "../hooks/Month";
 import Box from "@mui/material/Box";
@@ -20,7 +20,7 @@ export default function MonthPannel({ mode, setMode }) {
   const [note, setNote] = useState();
   const [weekday, setWeekday] = useState();
   const [reminder, setReminder] = useState({
-    data: [{}],
+    data: [],
   });
 
   const handleMode = () => {
@@ -31,6 +31,7 @@ export default function MonthPannel({ mode, setMode }) {
     setMonth(e.target.value);
     setChosen(0);
   };
+  
   const handleYearChange = (e) => {
     setYear(e.target.value);
     setChosen(0);

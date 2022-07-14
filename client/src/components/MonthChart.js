@@ -1,6 +1,9 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import { Typography } from "@mui/material";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import { yellow } from "@mui/material/colors";
+
 
 export default function MonthChart({
   day,
@@ -28,7 +31,16 @@ export default function MonthChart({
     >
       <Grid>{weekday}</Grid>
       {typeof day === "number" && day}
-      <Typography>{reminder}</Typography>
+      {reminder && (
+        <>
+          <Typography mt={1}>
+            <NotificationsIcon style={{ color: yellow[500] }}/>
+          </Typography>
+          <Typography color={"red"} mt={2}>
+            {reminder}
+          </Typography>
+        </>
+      )}
     </Grid>
   );
 }
