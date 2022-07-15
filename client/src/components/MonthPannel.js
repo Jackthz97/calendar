@@ -161,6 +161,7 @@ export default function MonthPannel({ mode, setMode }) {
           <Box sx={{ minWidth: 120 }}>
             <Grid container spacing={1}>
               <Grid item xs={4}>
+              <ButtonStyled onClick={handleToday} mt={1} mr={2}>Today</ButtonStyled>
                 <FormControl>
                   <InputLabel id="demo-simple-select-label">Month</InputLabel>
                   <Select
@@ -207,7 +208,7 @@ export default function MonthPannel({ mode, setMode }) {
                     <MenuItem value={2033}>2033</MenuItem>
                   </Select>
                 </FormControl>
-                <Button onClick={handleToday} className="button-today">Today</Button>
+                {/* <ButtonStyled onClick={handleToday} mt={1} ml={5}>Today</ButtonStyled> */}
               </Grid>
               <Grid
                 item
