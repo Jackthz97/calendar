@@ -82,3 +82,8 @@
   position: relative;
   top: -10px;
 }
+
+.button-today {
+  margin-top: 15px;
+  margin-left: 15px;
+}

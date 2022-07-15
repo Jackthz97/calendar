@@ -41,8 +41,7 @@ export default function Month(month, year, reminder) {
       for (let x = 31 - remainder; x <= 30; x++) {
         arr.push({ date: x.toString() });
       }
-    }
-    else if (remainder > 0 && month === 3) {
+    } else if (remainder > 0 && month === 3) {
       for (let x = 29 - remainder; x <= 28; x++) {
         arr.push({ date: x.toString() });
       }

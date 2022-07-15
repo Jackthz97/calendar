@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Grid } from "@mui/material";
 import Month from "../hooks/Month";
 import Box from "@mui/material/Box";
@@ -8,12 +8,23 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MonthPannelList from "./MonthPannelList";
 import MonthChart from "./MonthChart";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
+// import Button from "./Button";
 import Popup from "./Popup";
+// import { styled } from "@material-ui/core/styles";
+// import { spacing } from "@material-ui/system";
+// import MuiButton from "@material-ui/core/Button";
+import styled from "@emotion/styled";
+import { spacing } from "@mui/system";
+const ButtonStyled = styled(Button)(spacing);
 
 export default function MonthPannel({ mode, setMode }) {
-  const [month, setMonth] = useState(1);
-  const [year, setYear] = useState(2022);
+  let today = new Date();
+  let yy = today.getFullYear();
+  let mm = today.getMonth() + 1;
+  let dd = today.getDate();
+  const [month, setMonth] = useState(mm);
+  const [year, setYear] = useState(yy);
   const [date, setDate] = useState(1);
   const [chosen, setChosen] = useState();
   const [popup, setPopup] = useState(false);
@@ -31,7 +42,7 @@ export default function MonthPannel({ mode, setMode }) {
     setMonth(e.target.value);
     setChosen(0);
   };
-  
+
   const handleYearChange = (e) => {
     setYear(e.target.value);
     setChosen(0);
@@ -39,11 +50,12 @@ export default function MonthPannel({ mode, setMode }) {
   const handleNotes = () => {
     popup ? setPopup(false) : setPopup(true);
   };
-  let today = new Date();
-  let yy = today.getFullYear();
-  let mm = today.getMonth()+1;
-  let dd = today.getDate();
-  console.log(yy, mm, dd)
+  const handleToday = () => {
+    setYear(yy)
+    setMonth(mm)
+    setDate(dd)
+  }
+  // console.log(yy, mm, dd)
   let monthArray = Month(month, year, reminder);
 
   const monthList = monthArray.map((e) => {
@@ -195,6 +207,7 @@ export default function MonthPannel({ mode, setMode }) {
                     <MenuItem value={2033}>2033</MenuItem>
                   </Select>
                 </FormControl>
+                <Button onClick={handleToday} className="button-today">Today</Button>
               </Grid>
               <Grid
                 item
@@ -215,6 +228,9 @@ export default function MonthPannel({ mode, setMode }) {
                   /{date < 10 && 0}
                   {date}/
                   {typeof date === "string" ? month - 1 < 1 && year - 1 : year}
+                  {/* {month === mm && year === yy && (
+                    <Typography>Today</Typography>
+                  )} */}
                 </Grid>
                 <Grid>
                   <Button onClick={handleMode}>{mode}</Button>
