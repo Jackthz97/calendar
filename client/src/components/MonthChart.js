@@ -4,7 +4,6 @@ import { Typography } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { yellow } from "@mui/material/colors";
 
-
 export default function MonthChart({
   day,
   month,
@@ -34,7 +33,7 @@ export default function MonthChart({
       {reminder && (
         <>
           <Typography mt={1}>
-            <NotificationsIcon style={{ color: yellow[500] }}/>
+            <NotificationsIcon style={{ color: yellow[500] }} />
           </Typography>
           <Typography color={"red"} mt={2}>
             {reminder}
