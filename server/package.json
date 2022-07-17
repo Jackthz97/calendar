@@ -8,8 +8,11 @@
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
+    "body-parser": "^1.18.3",
     "debug": "~2.6.9",
     "dotenv": "^16.0.1",
+    "cors": "^2.8.5",
+    "axios": "^0.26.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
