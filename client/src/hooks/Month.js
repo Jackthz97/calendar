@@ -1,6 +1,7 @@
 import DisplayWeek from "./DisplayWeek";
 
 export default function Month(month, year, reminder) {
+  console.log('activated')
   const monthChart = [0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5];
   let arr = [];
   let i = year - 2000;

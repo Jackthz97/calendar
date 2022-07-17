@@ -51,12 +51,15 @@ export default function MonthPannel({ mode, setMode }) {
     popup ? setPopup(false) : setPopup(true);
   };
   const handleToday = () => {
-    setYear(yy)
-    setMonth(mm)
-    setDate(dd)
-  }
+    setYear(yy);
+    setMonth(mm);
+    setDate(dd);
+  };
   // console.log(yy, mm, dd)
-  let monthArray = Month(month, year, reminder);
+
+  let monthArray = useMemo(() => {
+    return Month(month, year, reminder);
+  }, [reminder, month, year]);
 
   const monthList = monthArray.map((e) => {
     return (
@@ -161,7 +164,9 @@ export default function MonthPannel({ mode, setMode }) {
           <Box sx={{ minWidth: 120 }}>
             <Grid container spacing={1}>
               <Grid item xs={4}>
-              <ButtonStyled onClick={handleToday} mt={1} mr={2}>Today</ButtonStyled>
+                <ButtonStyled onClick={handleToday} mt={1} mr={2}>
+                  Today
+                </ButtonStyled>
                 <FormControl>
                   <InputLabel id="demo-simple-select-label">Month</InputLabel>
                   <Select
