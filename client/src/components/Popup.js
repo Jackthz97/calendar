@@ -15,6 +15,10 @@ export default function Popup({
   year,
   month,
 }) {
+
+  const handleClose = () => {
+    setPopup(false);
+  }
   const handlePopup = () => {
     setPopup(false);
     setReminder((prev) => ({
@@ -35,10 +39,13 @@ export default function Popup({
       <Grid className="text-box">
         <EventNoteIcon className="EventNoteIcon" />
       </Grid>
+      <Grid align={'end'}>
+      <Button onClick={handleClose}>X</Button>
+      </Grid>
       <Grid className="text-box">
         <h1>Reminders</h1>
       </Grid>
-      <Grid className="text-box" mt={4}>
+      <Grid className="text-box" mt={2}>
         <TextField
           id="standard-basic"
           label="Reminder"
@@ -48,7 +55,7 @@ export default function Popup({
           }}
         />
       </Grid>
-      <Grid className="text-box" mt={10}>
+      <Grid className="text-box" mt={6}>
         <Button variant="contained" onClick={handlePopup}>
           Add
         </Button>
