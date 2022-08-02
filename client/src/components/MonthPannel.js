@@ -8,14 +8,11 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MonthPannelList from "./MonthPannelList";
 import MonthChart from "./MonthChart";
-import { Button, Typography } from "@mui/material";
-// import Button from "./Button";
+import { Button } from "@mui/material";
 import Popup from "./Popup";
-// import { styled } from "@material-ui/core/styles";
-// import { spacing } from "@material-ui/system";
-// import MuiButton from "@material-ui/core/Button";
 import styled from "@emotion/styled";
 import { spacing } from "@mui/system";
+
 const ButtonStyled = styled(Button)(spacing);
 
 export default function MonthPannel({ mode, setMode }) {
@@ -112,7 +109,7 @@ export default function MonthPannel({ mode, setMode }) {
   });
 
   return (
-    <>
+    <Grid container mt={1.5} direction={'row'} >
       {popup && (
         <Popup
           key={`${weekday}/${date}/${month}${year}`}
@@ -249,6 +246,6 @@ export default function MonthPannel({ mode, setMode }) {
           </Grid>
         </Grid>
       </Grid>
-    </>
+    </Grid>
   );
 }
