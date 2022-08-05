@@ -90,7 +90,7 @@ export default function Month(month, year, reminder) {
         reminder["data"][i].month === arr[j].month
       ) {
         let index = arr.indexOf(arr[j]);
-        arr[index].note = reminder["data"][i].reminder;
+        arr[index].note = reminder["data"][i].reminderNote;
       }
     }
   }

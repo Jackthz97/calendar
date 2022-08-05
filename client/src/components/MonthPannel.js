@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from "react";
-import { Grid } from "@mui/material";
+import React, { useState, useMemo, useEffect } from "react";
+import { Grid, Typography } from "@mui/material";
 import Month from "../hooks/Month";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -12,6 +12,7 @@ import { Button } from "@mui/material";
 import Popup from "./Popup";
 import styled from "@emotion/styled";
 import { spacing } from "@mui/system";
+import axios from "axios";
 
 const ButtonStyled = styled(Button)(spacing);
 
@@ -26,6 +27,7 @@ export default function MonthPannel({ mode, setMode }) {
   const [chosen, setChosen] = useState();
   const [popup, setPopup] = useState(false);
   const [note, setNote] = useState();
+  const [username, setUsername] = useState({});
   const [weekday, setWeekday] = useState();
   const [reminder, setReminder] = useState({
     data: [],
@@ -53,8 +55,33 @@ export default function MonthPannel({ mode, setMode }) {
     setDate(dd);
   };
   // console.log(yy, mm, dd)
-
+  useEffect(() => {
+    axios
+      .put("http://localhost:8080/reminder-get", { user_id: username.id })
+      .then((res) => {
+        // console.log("reminder-get res: ", res.data.remindernote);
+        res.data.map(e => {
+          setReminder((prev) => ({
+            data: [
+              ...prev.data,
+              {
+                weekday: e.weekday,
+                date: Number(e.date),
+                year: Number(e.year),
+                reminderNote: e.remindernote,
+                month: Number(e.month),
+              },
+            ],
+          }));
+        })
+        console.log("REEEEEEminder: ", reminder);
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      });
+  }, [popup]);
   let monthArray = useMemo(() => {
+    setUsername(JSON.parse(localStorage.getItem("username")));
     return Month(month, year, reminder);
   }, [reminder, month, year]);
 
@@ -109,7 +136,7 @@ export default function MonthPannel({ mode, setMode }) {
   });
 
   return (
-    <Grid container mt={1.5} direction={'row'} >
+    <Grid container mt={1.5} direction={"row"}>
       {popup && (
         <Popup
           key={`${weekday}/${date}/${month}${year}`}
@@ -122,8 +149,10 @@ export default function MonthPannel({ mode, setMode }) {
           note={note}
           year={year}
           month={month}
+          username={username}
         />
       )}
+      <Typography>Welcome {username.name} </Typography>
       <Grid container className="month-pannel">
         <Grid item container xs={2} direction={"row"} height={200} mt={5}>
           <Grid

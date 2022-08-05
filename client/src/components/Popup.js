@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import EventNoteIcon from "@mui/icons-material/EventNote";
+import axios from "axios";
 
 export default function Popup({
   mode,
@@ -14,11 +15,11 @@ export default function Popup({
   note,
   year,
   month,
+  username
 }) {
-
   const handleClose = () => {
     setPopup(false);
-  }
+  };
   const handlePopup = () => {
     setPopup(false);
     setReminder((prev) => ({
@@ -28,19 +29,35 @@ export default function Popup({
           weekday: weekday,
           date: date,
           year: year,
-          reminder: note,
+          reminderNote: note,
           month: month,
         },
       ],
     }));
+    console.log("NOTE   ", note);
+    axios
+      .put("http://localhost:8080/reminder-input", {
+        user: username.id,
+        weekday: weekday,
+        date: date,
+        year: year,
+        reminderNote: note,
+        month: month,
+      })
+      .then((res) => {
+        console.log("res: ", res);
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      });
   };
   return (
     <Grid className={mode === "dark" ? "popup-dark" : "popup"}>
       <Grid className="text-box">
         <EventNoteIcon className="EventNoteIcon" />
       </Grid>
-      <Grid align={'end'}>
-      <Button onClick={handleClose}>X</Button>
+      <Grid align={"end"}>
+        <Button onClick={handleClose}>X</Button>
       </Grid>
       <Grid className="text-box">
         <h1>Reminders</h1>

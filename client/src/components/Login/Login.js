@@ -19,23 +19,23 @@ import InputAdornment from "@mui/material/InputAdornment";
 import LockIcon from "@mui/icons-material/Lock";
 import { useState } from "react";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        krypto
-      </Link>
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+// function Copyright(props) {
+//   return (
+//     <Typography
+//       variant="body2"
+//       color="text.secondary"
+//       align="center"
+//       {...props}
+//     >
+//       {"Copyright © "}
+//       <Link color="inherit" href="https://mui.com/">
+//         krypto
+//       </Link>
+//       {new Date().getFullYear()}
+//       {"."}
+//     </Typography>
+//   );
+// }
 
 const theme = createTheme();
 
@@ -66,6 +66,7 @@ export default function Login() {
       .then((response) => {
         console.log("email:", response.data.email);
         console.log("password:", response.data.password);
+        console.log("id:", response.data.id);
         if (response.data.email && response.data.password) {
           localStorage.setItem("username", JSON.stringify(response.data));
 
@@ -114,7 +115,7 @@ export default function Login() {
               alignItems: "center",
             }}
           >
-            <img src="/KRYPTO_free-file.png" height="70" alt="logo"></img>
+            {/* <img src="/KRYPTO_free-file.png" height="70" alt="logo"></img> */}
 
             <Box
               component="form"
@@ -200,7 +201,7 @@ export default function Login() {
                   </Link>
                 </Grid>
               </Grid>
-              <Copyright sx={{ mt: 8 }} />
+              {/* <Copyright sx={{ mt: 8 }} /> */}
             </Box>
           </Box>
         </Grid>
