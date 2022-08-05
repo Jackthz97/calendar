@@ -87,3 +87,18 @@
   margin-top: 15px;
   margin-left: 15px;
 }
+
+.reminder-container{
+  text-align: center;
+  background-color: rgba(0, 140, 255, 0.805);
+}
+.remindercss {
+  display: inline;
+}
+
+.EditIcon {
+  display: inline-block;
+  float: right;
+  /* position: relative; */
+}
+

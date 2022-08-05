@@ -13,6 +13,7 @@ import Popup from "./Popup";
 import styled from "@emotion/styled";
 import { spacing } from "@mui/system";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const ButtonStyled = styled(Button)(spacing);
 
@@ -32,7 +33,10 @@ export default function MonthPannel({ mode, setMode }) {
   const [reminder, setReminder] = useState({
     data: [],
   });
-
+  let navigate = useNavigate();
+  if (!username.name) {
+    navigate("/");
+  }
   const handleMode = () => {
     mode === "dark" ? setMode("light") : setMode("dark");
   };
@@ -54,13 +58,17 @@ export default function MonthPannel({ mode, setMode }) {
     setMonth(mm);
     setDate(dd);
   };
-  // console.log(yy, mm, dd)
+
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    navigate("/");
+  };
+
   useEffect(() => {
     axios
       .put("http://localhost:8080/reminder-get", { user_id: username.id })
       .then((res) => {
-        // console.log("reminder-get res: ", res.data.remindernote);
-        res.data.map(e => {
+        res.data.map((e) => {
           setReminder((prev) => ({
             data: [
               ...prev.data,
@@ -73,13 +81,13 @@ export default function MonthPannel({ mode, setMode }) {
               },
             ],
           }));
-        })
-        console.log("REEEEEEminder: ", reminder);
+        });
       })
       .catch((err) => {
         console.log("err: ", err);
       });
   }, [popup]);
+
   let monthArray = useMemo(() => {
     setUsername(JSON.parse(localStorage.getItem("username")));
     return Month(month, year, reminder);
@@ -127,6 +135,7 @@ export default function MonthPannel({ mode, setMode }) {
               handleNotes();
               setWeekday(e.weekday);
             }}
+            mode={mode}
             active={e.date === chosen}
             reminder={e.note}
           />
@@ -152,7 +161,6 @@ export default function MonthPannel({ mode, setMode }) {
           username={username}
         />
       )}
-      <Typography>Welcome {username.name} </Typography>
       <Grid container className="month-pannel">
         <Grid item container xs={2} direction={"row"} height={200} mt={5}>
           <Grid
@@ -193,6 +201,7 @@ export default function MonthPannel({ mode, setMode }) {
                 <ButtonStyled onClick={handleToday} mt={1} mr={2}>
                   Today
                 </ButtonStyled>
+
                 <FormControl>
                   <InputLabel id="demo-simple-select-label">Month</InputLabel>
                   <Select
@@ -216,6 +225,7 @@ export default function MonthPannel({ mode, setMode }) {
                     <MenuItem value={12}>Dec</MenuItem>
                   </Select>
                 </FormControl>
+
                 <FormControl>
                   <InputLabel id="simple-select-label">Year</InputLabel>
                   <Select
@@ -239,7 +249,6 @@ export default function MonthPannel({ mode, setMode }) {
                     <MenuItem value={2033}>2033</MenuItem>
                   </Select>
                 </FormControl>
-                {/* <ButtonStyled onClick={handleToday} mt={1} ml={5}>Today</ButtonStyled> */}
               </Grid>
               <Grid
                 item
@@ -265,8 +274,13 @@ export default function MonthPannel({ mode, setMode }) {
                   )} */}
                 </Grid>
                 <Grid>
+                <Typography>Welcome {username.name} </Typography>
+                </Grid>
+                <Grid>
                   <Button onClick={handleMode}>{mode}</Button>
                 </Grid>
+
+                  <Button onClick={handleLogout}>Logout</Button>
               </Grid>
             </Grid>
           </Box>
